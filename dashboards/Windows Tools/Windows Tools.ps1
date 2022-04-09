@@ -12,6 +12,9 @@
         New-UDListItem -Label "Adapters" -Icon (New-UDIcon -Icon 'SdCard') -OnClick { Invoke-UDRedirect '/adapters' } -Nested
         New-UDListItem -Label "Ports" -Icon (New-UDIcon -Icon 'Plug') -OnClick { Invoke-UDRedirect '/ports' } -Nested
     }
+    New-UDListItem -Label "Time" -Icon (New-UDIcon -Icon 'NetworkWired') -Children {
+        New-UDListItem -Label "Time Zones" -Icon (New-UDIcon -Icon 'SdCard') -OnClick { Invoke-UDRedirect '/timezone' } -Nested
+    }
 )
 
 New-UDDashboard -Pages @(
@@ -305,6 +308,16 @@ New-UDDashboard -Pages @(
             }
 
         ) -ShowPagination -ShowSort -Title 'Ports'
+    } -Navigation $nav
+    New-UDPage -Name 'Time Zones' -Url '/timezone' -Content {
+        New-UDCard -Title 'Current Time' -Content {
+            New-UDForm -Children {
+                New-UDAutocomplete -Options ((Get-TimeZone -ListAvailable).Id) -Id 'timezone'
+            } -OnSubmit {
+                $tz = Get-TimeZone -Id $EventData.timezone
+                New-UDTypography ([TimeZoneInfo]::ConvertTime(([DateTime]::Now), $tz))
+            }
+        }
     } -Navigation $nav
     New-UDPage -Name 'Random' -Content {
         New-UDButton -Text 'Random String' -OnClick {
