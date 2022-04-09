@@ -1,0 +1,1 @@
+﻿New-PSUDashboard -Name "Windows Developer Tools" -FilePath "dashboards\Windows Tools\Windows Tools.ps1" -BaseUrl "/windevtools" -Framework "UniversalDashboard:Latest" -SessionTimeout 0 -AutoDeploy -Description "A set of tools for Windows developers. " -Credential "Default"

@@ -1,0 +1,134 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">FindOpenFile</S>
+      <Version N="Version">1.0.1</Version>
+      <S N="Type">Module</S>
+      <S N="Description">Find open files on Windows with PowerShell</S>
+      <S N="Author">Adam Driscoll</S>
+      <S N="CompanyName">adamdriscoll</S>
+      <S N="Copyright">Ironman Software 2020</S>
+      <DT N="PublishedDate">2020-05-31T21:33:58-06:00</DT>
+      <Obj N="InstalledDate" RefId="1">
+        <DT>2022-04-04T08:24:22.1317532-06:00</DT>
+        <MS>
+          <Obj N="DisplayHint" RefId="2">
+            <TN RefId="1">
+              <T>Microsoft.PowerShell.Commands.DisplayHintType</T>
+              <T>System.Enum</T>
+              <T>System.ValueType</T>
+              <T>System.Object</T>
+            </TN>
+            <ToString>DateTime</ToString>
+            <I32>2</I32>
+          </Obj>
+        </MS>
+      </Obj>
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/ironmansoftware/findopenfiles/blob/master/LICENSE.md</URI>
+      <URI N="ProjectUri">https://github.com/ironmansoftware/findopenfiles</URI>
+      <Nil N="IconUri" />
+      <Obj N="Tags" RefId="3">
+        <TN RefId="2">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>windows</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="4">
+        <TN RefId="3">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Obj N="Value" RefId="5">
+              <TNRef RefId="2" />
+              <LST>
+                <S>Find-OpenFile</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="6">
+              <TNRef RefId="2" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="6" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="2" />
+              <LST>
+                <S>Find-OpenFile</S>
+              </LST>
+            </Obj>
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">https://github.com/ironmansoftware/findopenfiles/blob/master/CHANGELOG.md</S>
+      <Obj N="Dependencies" RefId="8">
+        <TNRef RefId="2" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="9">
+        <TN RefId="4">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">Ironman Software 2020</S>
+          <S N="description">Find open files on Windows with PowerShell</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">https://github.com/ironmansoftware/findopenfiles/blob/master/CHANGELOG.md</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">549</S>
+          <S N="downloadCount">563</S>
+          <S N="packageSize">29410</S>
+          <S N="published">5/31/2020 9:33:58 PM -06:00</S>
+          <S N="created">5/31/2020 9:33:58 PM -06:00</S>
+          <S N="lastUpdated">3/31/2022 2:20:05 PM -06:00</S>
+          <S N="tags">windows PSModule PSCmdlet_Find-OpenFile PSCommand_Find-OpenFile PSIncludes_Cmdlet</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2022-03-31T14:20:05Z</S>
+          <S N="NormalizedVersion">1.0.1</S>
+          <S N="Authors">Adam Driscoll</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">FindOpenFile.nuspec|FindOpenFile.psd1|findopenfiles.dll</S>
+          <S N="GUID">ed3d6408-fe70-40e3-adae-c43dfe1b88ae</S>
+          <S N="CompanyName">Ironman Software</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\adamr\OneDrive\Documents\PowerShell\Modules\FindOpenFile\1.0.1</S>
+    </MS>
+  </Obj>
+</Objs>
