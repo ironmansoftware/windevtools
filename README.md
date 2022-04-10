@@ -33,6 +33,8 @@ The Windows Developer Tools are a template for [PowerShell Universal](https://ir
 
 ![](/images/random.png)
 
+![](/images/disk.png)
+
 ## Install WinDevTools 
 
 You can either download from the Template directory or install directly from PowerShell Universal. 
