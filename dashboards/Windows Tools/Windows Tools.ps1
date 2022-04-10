@@ -1,23 +1,37 @@
 ﻿$Nav = @(
-    New-UDListItem -Label 'Development' -Icon (New-UDIcon -Icon FileCode) -Children {
-        New-UDListItem -Label "Encoding" -Icon (New-UDIcon -Icon 'FileAlt') -OnClick { Invoke-UDRedirect '/encoding' } -Nested
-        New-UDListItem -Label "File Diff" -Icon (New-UDIcon -Icon 'FileAlt') -OnClick { Invoke-UDRedirect '/diff' } -Nested
-        New-UDListItem -Label "Random" -Icon (New-UDIcon -Icon 'FileAlt') -OnClick { Invoke-UDRedirect '/random' } -Nested
+    New-UDListItem -Label 'Disk' -Icon (New-UDIcon -Icon Server -Size lg) -Children {
+        New-UDListItem -Label "Disk Usage" -Icon (New-UDIcon -Icon 'ChartPie' -Size lg) -OnClick { Invoke-UDRedirect '/disk-usage' } -Nested
+        New-UDListItem -Label "Locked Files" -Icon (New-UDIcon -Icon 'Lock' -Size lg) -OnClick { Invoke-UDRedirect '/locked-files' } -Nested
     }
-    New-UDListItem -Label 'Disk' -Icon (New-UDIcon -Icon Server) -Children {
-        New-UDListItem -Label "Locked Files" -Icon (New-UDIcon -Icon 'Lock') -OnClick { Invoke-UDRedirect '/locked-files' } -Nested
-        New-UDListItem -Label "Disk Usage" -Icon (New-UDIcon -Icon 'ChartPie') -OnClick { Invoke-UDRedirect '/disk-usage' } -Nested
+    New-UDListItem -Label "Encoding" -Icon (New-UDIcon -Icon 'FileAlt' -Size lg) -OnClick { Invoke-UDRedirect '/encoding' }
+    New-UDListItem -Label "File Diff" -Icon (New-UDIcon -Icon 'FileAlt' -Size lg) -OnClick { Invoke-UDRedirect '/diff' }
+    New-UDListItem -Label "HTTP Client" -Icon (New-UDIcon -Icon 'Wifi' -Size lg) -OnClick { Invoke-UDRedirect '/http' }
+    New-UDListItem -Label "Networking" -Icon (New-UDIcon -Icon 'NetworkWired' -Size lg) -Children {
+        New-UDListItem -Label "Adapters" -Icon (New-UDIcon -Icon 'SdCard' -Size lg) -OnClick { Invoke-UDRedirect '/adapters' } -Nested
+        New-UDListItem -Label "Open Ports" -Icon (New-UDIcon -Icon 'Plug' -Size lg) -OnClick { Invoke-UDRedirect '/ports' } -Nested
     }
-    New-UDListItem -Label "Networking" -Icon (New-UDIcon -Icon 'NetworkWired') -Children {
-        New-UDListItem -Label "Adapters" -Icon (New-UDIcon -Icon 'SdCard') -OnClick { Invoke-UDRedirect '/adapters' } -Nested
-        New-UDListItem -Label "Ports" -Icon (New-UDIcon -Icon 'Plug') -OnClick { Invoke-UDRedirect '/ports' } -Nested
-    }
-    New-UDListItem -Label "Time" -Icon (New-UDIcon -Icon 'NetworkWired') -Children {
-        New-UDListItem -Label "Time Zones" -Icon (New-UDIcon -Icon 'SdCard') -OnClick { Invoke-UDRedirect '/timezone' } -Nested
+    New-UDListItem -Label "Random" -Icon (New-UDIcon -Icon 'ArrowAltCircleDown' -Size lg) -OnClick { Invoke-UDRedirect '/random' }
+    New-UDListItem -Label "Time" -Icon (New-UDIcon -Icon 'Clock' -Size lg) -Children {
+        New-UDListItem -Label "Time Zones" -Icon (New-UDIcon -Icon 'Clock' -Size lg) -OnClick { Invoke-UDRedirect '/timezone' } -Nested
     }
 )
 
-New-UDDashboard -Pages @(
+$Theme = @{
+    palette = @{
+        primary    = @{
+            main = "#1e1e1e"
+        }
+        text       = @{
+            primary = "#f7f7f7"
+        }
+        background = @{
+            default = "#5b5b5b"
+            paper   = "#727272"
+        }
+    }
+}
+
+New-UDDashboard -DisableThemeToggle -Theme $Theme -Pages @(
     New-UDPage -Name 'Adapters' -Content {
         $Adapters = Get-NetAdapter 
         New-UDTable -Data $Adapters -Columns @(
@@ -26,6 +40,25 @@ New-UDDashboard -Pages @(
             New-UDTableColumn -Title 'Mac Address' -Property 'MacAddress' -ShowFilter
             New-UDTableColumn -Title 'Speed' -Property 'LinkSpeed' -ShowFilter
         ) -ShowPagination -ShowSort -Title 'Adapters'
+    } -Navigation $Nav
+    New-UDPage -Name 'HTTP' -Content {
+        New-UDForm -Children {
+            New-UDTextbox -Id 'url' -Label 'URL' -FullWidth
+            New-UDSelect -Id 'method' -Label 'Method' -Option {
+                New-UDSelectOption -Value 'GET' -Name 'GET'
+                New-UDSelectOption -Value 'POST' -Name 'POST'
+                New-UDSelectOption -Value 'PUT' -Name 'PUT'
+                New-UDSelectOption -Value 'DELETE' -Name 'DELETE'
+            } -FullWidth
+            New-UDTextbox -Id 'body' -Label 'Body' -Multiline -FullWidth
+        } -OnSubmit {
+            $Response = Invoke-WebRequest -Method $EventData.Method -Uri $EventData.Url -Body $EventData.Body
+            Set-UDElement -Id 'response' -Properties @{
+                code = "$($Response | Out-String)`r`n$($Response.Content)"
+            }
+        }
+
+        New-UDCodeEditor -Id 'response' -Height 500 -Theme 'vs-dark'
     } -Navigation $Nav
     New-UDPage -Name 'Disk Usage' -Content {
 
@@ -116,7 +149,7 @@ New-UDDashboard -Pages @(
                         $target = [System.Text.Encoding]::GetEncoding($EventData.targetEncoding)
                         $text = $target.GetString($source.GetBytes($EventData.text))
 
-                        New-UDCodeEditor -Code $text -ReadOnly -Height 500  
+                        New-UDCodeEditor -Code $text -ReadOnly -Height 500 -Theme 'vs-dark'
                     }
                 }
             }
@@ -212,7 +245,7 @@ New-UDDashboard -Pages @(
                             $text = [System.Web.HttpUtility]::UrlDecode($EventData.Text)
                         }
                 
-                        New-UDCodeEditor -Code $text -ReadOnly -Height 500  
+                        New-UDCodeEditor -Code $text -ReadOnly -Height 500 -Theme 'vs-dark'
                     }
                 }
             }
@@ -228,7 +261,7 @@ New-UDDashboard -Pages @(
                         else {
                             $text = [System.Web.HttpUtility]::HtmlDecode($EventData.Text)
                         }
-                        New-UDCodeEditor -Code $text -ReadOnly -Height 500  
+                        New-UDCodeEditor -Code $text -ReadOnly -Height 500 -Theme 'vs-dark'
                     }
                 }
             }
@@ -238,7 +271,7 @@ New-UDDashboard -Pages @(
                         New-UDTextbox -Id 'text' -Multiline -FullWidth
                     } -OnSubmit {
                         $text = $EventData.text | Format-Hex | Out-String
-                        New-UDCodeEditor -Code $text -ReadOnly -Height 500  
+                        New-UDCodeEditor -Code $text -ReadOnly -Height 500 -Theme 'vs-dark'
                     }
                 }
             }
@@ -249,7 +282,7 @@ New-UDDashboard -Pages @(
                     } -OnSubmit {
                         Show-UDToast -Id 'hexing' -Message 'Generating hex....' -Persistent
                         $text = Format-Hex -Path $EventData.file2.FileName | Out-String
-                        New-UDCodeEditor -Code $text -ReadOnly -Height 500
+                        New-UDCodeEditor -Code $text -ReadOnly -Height 500 -Theme 'vs-dark'
                         Hide-UDToast -Id 'hexing'
                     }
                 }
@@ -266,7 +299,7 @@ New-UDDashboard -Pages @(
             } -OnSubmit {
                 $Left = Get-Content $EventData.Left.FileName -Raw
                 $Right = Get-Content $EventData.Right.FileName -Raw
-                New-UDCodeEditor -Original $Left -Code $Right -Height 500
+                New-UDCodeEditor -Original $Left -Code $Right -Height 500 -Theme 'vs-dark'
             }
         } 
     } -Navigation $Nav
@@ -309,15 +342,36 @@ New-UDDashboard -Pages @(
 
         ) -ShowPagination -ShowSort -Title 'Ports'
     } -Navigation $nav
-    New-UDPage -Name 'Time Zones' -Url '/timezone' -Content {
-        New-UDCard -Title 'Current Time' -Content {
-            New-UDForm -Children {
-                New-UDAutocomplete -Options ((Get-TimeZone -ListAvailable).Id) -Id 'timezone'
-            } -OnSubmit {
-                $tz = Get-TimeZone -Id $EventData.timezone
-                New-UDTypography ([TimeZoneInfo]::ConvertTime(([DateTime]::Now), $tz))
+    New-UDPage -Name 'Time Zones' -Url '/timezone' -Content {   
+        New-UDTabs -Tabs {
+            New-UDTab -Text 'Current Time' -Content {
+                New-UDCard -Title 'Current Time' -Content {
+                    New-UDForm -Children {
+                        New-UDTypography -Text "The local current time is: $(Get-Date)" -Variant h5
+                        New-UDTypography 'Time Zone'
+                        New-UDAutocomplete -Options ((Get-TimeZone -ListAvailable).Id) -Id 'timezone'
+                    } -OnSubmit {
+                        $tz = Get-TimeZone -Id $EventData.timezone
+                        New-UDTypography -Text "The local current time is: $(Get-Date)" -Variant h5
+                        New-UDTypography ([TimeZoneInfo]::ConvertTime(([DateTime]::Now), $tz)) -Variant h5
+                    } 
+                }
+            }
+            New-UDTab -Text 'Convert Time' -Content {
+                New-UDCard -Title 'Convert Time' -Content {
+                    New-UDForm -Children {
+                        New-UDTextbox -Label 'Time' -Id 'time' -FullWidth -Value (Get-Date)
+                        New-UDTypography 'Target Time Zone'
+                        New-UDAutocomplete -Options ((Get-TimeZone -ListAvailable).Id) -Id 'timezone'
+                    } -OnSubmit {
+                        $tz = Get-TimeZone -Id $EventData.timezone
+                        $Time = [DateTime]::Parse($EventData.Time)
+                        New-UDTypography ([TimeZoneInfo]::ConvertTime($Time, $tz)) -Variant h5
+                    }
+                }
             }
         }
+
     } -Navigation $nav
     New-UDPage -Name 'Random' -Content {
         New-UDButton -Text 'Random String' -OnClick {
