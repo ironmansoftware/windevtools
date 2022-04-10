@@ -1,0 +1,122 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">UniversalDashboard.SyntaxHighlighter</S>
+      <S N="Version">1.0.0</S>
+      <S N="Type">Module</S>
+      <S N="Description">Syntax Highlighter for Universal Dashboard.</S>
+      <S N="Author">Adam Driscoll</S>
+      <S N="CompanyName">adamdriscoll</S>
+      <S N="Copyright">2019 Ironman Software, LLC</S>
+      <DT N="PublishedDate">2019-10-01T18:35:26-06:00</DT>
+      <Nil N="InstalledDate" />
+      <Nil N="UpdatedDate" />
+      <Nil N="LicenseUri" />
+      <URI N="ProjectUri">https://github.com/ironmansoftware/ud-syntaxhighlighter</URI>
+      <URI N="IconUri">https://github.com/ironmansoftware/ud-syntaxhighlighter/raw/master/images/screenshot.png</URI>
+      <Obj N="Tags" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>universaldashboard</S>
+          <S>SyntaxHighlighter</S>
+          <S>ud-control</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="2">
+        <TN RefId="2">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Obj N="Value" RefId="3">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="4">
+              <TNRef RefId="1" />
+              <LST>
+                <S>New-UDSyntaxHighlighter</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="5">
+              <TNRef RefId="1" />
+              <LST>
+                <S>New-UDSyntaxHighlighter</S>
+              </LST>
+            </Obj>
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">Initial release</S>
+      <Obj N="Dependencies" RefId="6">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="7">
+        <TN RefId="3">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">2019 Ironman Software, LLC</S>
+          <S N="description">Syntax Highlighter for Universal Dashboard.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">Initial release</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">739</S>
+          <S N="downloadCount">739</S>
+          <S N="packageSize">599634</S>
+          <S N="published">10/1/2019 6:35:26 PM -06:00</S>
+          <S N="created">10/1/2019 6:35:26 PM -06:00</S>
+          <S N="lastUpdated">4/9/2022 1:05:43 AM -06:00</S>
+          <S N="tags">universaldashboard SyntaxHighlighter ud-control PSModule PSFunction_New-UDSyntaxHighlighter PSCommand_New-UDSyntaxHighlighter PSIncludes_Function</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2022-04-09T01:05:43Z</S>
+          <S N="NormalizedVersion">1.0.0</S>
+          <S N="Authors">Adam Driscoll</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">UniversalDashboard.SyntaxHighlighter.nuspec|index.56b4f4ea55a4051f669a.bundle.js|index.56b4f4ea55a4051f669a.bundle.map|UniversalDashboard.SyntaxHighlighter.psd1|UniversalDashboard.SyntaxHighlighter.psm1</S>
+          <S N="GUID">d4290e47-d9be-416b-80e4-68c8b15c9c5b</S>
+          <S N="CompanyName">Ironman Software, LLC</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\ProgramData\UniversalAutomation\Repository\Modules\UniversalDashboard.SyntaxHighlighter\1.0.0</S>
+    </MS>
+  </Obj>
+</Objs>
