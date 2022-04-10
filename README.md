@@ -27,6 +27,11 @@ The Windows Developer Tools are a template for [PowerShell Universal](https://ir
         - Current Time to Time Zone 
         - Time to Time Zone
 
+![](/images/hex.png)
+
+![](/images/http.png)
+
+![](/images/random.png)
 
 ## Install WinDevTools 
 
@@ -35,3 +40,4 @@ You can either download from the Template directory or install directly from Pow
 ## Use WinDevTools
 
 Once the template is installed, you can navigate to `http://localhost:5000/windevtools` to access the tools. Some tools require that PowerShell Universal is running as administrator.
+
